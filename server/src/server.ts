@@ -8,3 +8,5 @@ app.get('/users', () => {
 });
 
 app.listen(3333);
+
+//npx ts-node src/server.ts   

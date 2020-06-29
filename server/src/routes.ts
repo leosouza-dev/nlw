@@ -8,7 +8,15 @@ routes.get('/items', async (request, response) => {
     // como demora um pouco, usar await
     const items = await knex('items').select('*');
 
-    return response.json(items);
+    const serializedItems = items.map(item => {
+        return {
+            id: item.id,
+            title: item.title,
+            image_url: `http://localhost:3333/uploads/${item.image}`,
+        }
+    });
+
+    return response.json(serializedItems);
 });
 
 export default routes;

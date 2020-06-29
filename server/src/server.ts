@@ -1,6 +1,7 @@
 import express, { json, request } from 'express';
 
 const app = express();
+app.use(express.json());
 
 const users = [
     'Leonardo',

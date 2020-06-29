@@ -32,8 +32,11 @@ routes.post('/points', async (request, response) => {
         items // que vem do relacionamento
     } = request.body;
 
+    // uma query depende da outra - tratar com transaction
+    const trx = await knex.transaction();
+
     // short sintaxe
-    const ids = await knex('points').insert({
+    const insertedIds = await trx('points').insert({
         image: 'image-teste',
         name, // sem short sintexe
         email,
@@ -44,16 +47,18 @@ routes.post('/points', async (request, response) => {
         uf,
     });
 
+    const point_id = insertedIds[0];
+
     //relacionamento
     // percorre os items recebido e devolve um obj com o id item e do point criado
     const pointItems = items.map((item_id: number) => {
         return {
-            point_id: ids[0],
+            point_id,
             item_id,
         };
     });
 
-    await knex('point_items').insert(pointItems);
+    await trx('point_items').insert(pointItems);
 
     return response.json({ success: true });
 });

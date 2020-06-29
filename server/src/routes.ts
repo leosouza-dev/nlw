@@ -33,7 +33,7 @@ routes.post('/points', async (request, response) => {
     } = request.body;
 
     // short sintaxe
-    await knex('points').insert({
+    const ids = await knex('points').insert({
         image: 'image-teste',
         name, // sem short sintexe
         email,
@@ -43,6 +43,17 @@ routes.post('/points', async (request, response) => {
         city,
         uf,
     });
+
+    //relacionamento
+    // percorre os items recebido e devolve um obj com o id item e do point criado
+    const pointItems = items.map((item_id: number) => {
+        return {
+            point_id: ids[0],
+            item_id,
+        };
+    });
+
+    await knex('point_items').insert(pointItems);
 
     return response.json({ success: true });
 });

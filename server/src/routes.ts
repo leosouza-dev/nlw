@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import knex from './database/connection';
 
 const routes = express.Router();
@@ -17,6 +17,34 @@ routes.get('/items', async (request, response) => {
     });
 
     return response.json(serializedItems);
+});
+
+routes.post('/points', async (request, response) => {
+    // desestruturação
+    const {
+        name,
+        email,
+        whatsapp,
+        latitue,
+        longitude,
+        city,
+        uf,
+        items // que vem do relacionamento
+    } = request.body;
+
+    // short sintaxe
+    await knex('points').insert({
+        image: 'image-teste',
+        name, // sem short sintexe
+        email,
+        whatsapp,
+        latitue,
+        longitude,
+        city,
+        uf,
+    });
+
+    return response.json({ success: true });
 });
 
 export default routes;

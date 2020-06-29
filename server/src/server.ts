@@ -35,13 +35,11 @@ app.get('/users', (request, response) => {
     return response.json(filteredUsers);
 });
 
+// testando o request param - vem do corpo da requisição
 app.post('/users', (request, response) => {
-    const user = {
-        name: 'Leonardo',
-        email: `leonardo.rodrigues@caelum.com.br`
-    };
+    const data = request.body;
 
-    return response.json(user);
+    return response.json(data);
 });
 
 app.listen(3333);

@@ -51,3 +51,7 @@ app.listen(3333);
 
 // npx ts-node src/server.ts   
 // npm run dev
+
+// vamos usar knex para trabalhar com banco de dados relacionais
+// padrão - SELECT * FROM  users WHERE name = 'Chicó'
+// usando o Knex - knex('users').where.('name', 'Chicó').select(*)

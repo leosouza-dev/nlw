@@ -40,7 +40,11 @@ app.get('/users', (request, response) => {
 app.post('/users', (request, response) => {
     const data = request.body;
 
-    return response.json(data);
+    const user = {
+        name: data.name,
+        email: data.email
+    }
+    return response.json(user);
 });
 
 app.listen(3333);

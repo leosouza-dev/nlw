@@ -27,7 +27,7 @@ class PointsController{
             name,
             email,
             whatsapp,
-            latitue,
+            latitude,
             longitude,
             city,
             uf,
@@ -42,7 +42,7 @@ class PointsController{
             name, // sem short sintexe
             email,
             whatsapp,
-            latitue,
+            latitude,
             longitude,
             city,
             uf,
